@@ -12,18 +12,24 @@ let Daily_Boxes = [169660, 180675], // Deliver Elite Gift box , Deliver Elite Co
     EmpLeftToClaim;
 
     dispatch.hook('S_LOAD_CLIENT_USER_SETTING', 1, () => {
-        if(slots.length > 0){
-        setTimeout(function(){ command.message('Claiming Dailies in ' + Wait_time + ' seconds.'); }, Load_time);
-        setTimeout(claimElite, (Wait_time+Load_time)*1000);
-        }
-        if(EmpLeftToClaim) {
-            setTimeout(function(){ command.message('Claiming emporium in ' + Wait_time + ' seconds.'); }, Load_time);
+        if(slots.length > 0 && EmpLeftToClaim){
+            setTimeout(function(){ command.message('(Auto-Daily) Claiming Daily Boxes and Emporium in ' + Wait_time + ' seconds.'); }, Load_time);
+            setTimeout(claimElite, (Wait_time+Load_time)*1000);
             setTimeout(claimEmporium, (Wait_time+Load_time)*1000);
         }
+        else if(slots.length > 0){
+            setTimeout(function(){ command.message('(Auto-Daily) Claiming Daily Boxes in ' + Wait_time + ' seconds.'); }, Load_time);
+            setTimeout(claimElite, (Wait_time+Load_time)*1000);
+        }
+        else if(EmpLeftToClaim) {
+            setTimeout(function(){ command.message('(Auto-Daily) Claiming Emporium in ' + Wait_time + ' seconds.'); }, Load_time);
+            setTimeout(claimEmporium, (Wait_time+Load_time)*1000);
+        }
+        else  setTimeout(function(){ command.message('(Auto-Daily) Nothing to claim.'); }, Load_time);
     });
     
     dispatch.hook('S_SEND_VIP_SYSTEM_INFO', 1, event => {
-        EmpLeftToClaim = (event.dailyCredits) ? true : false;
+        if(event.tier > 0) EmpLeftToClaim = (event.dailyCredits) ? true : false;
     });
 
 	dispatch.hook('S_PCBANGINVENTORY_DATALIST', 1, event => {
