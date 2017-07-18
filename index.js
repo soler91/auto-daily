@@ -25,7 +25,7 @@ let Daily_Boxes = [169660, 180675], // Deliver Elite Gift box , Deliver Elite Co
             setTimeout(function(){ command.message('(Auto-Daily) Claiming Emporium in ' + Wait_time + ' seconds.'); }, Load_time);
             setTimeout(claimEmporium, (Wait_time+Load_time)*1000);
         }
-        else  setTimeout(function(){ command.message('(Auto-Daily) Nothing to claim.'); }, Load_time);
+        else setTimeout(function(){ command.message('(Auto-Daily) Nothing to claim.'); }, Load_time);
     });
     
     dispatch.hook('S_SEND_VIP_SYSTEM_INFO', 1, event => {
