@@ -3,7 +3,7 @@ const Wait_time = 30, // Time in seconds after loading
 
 const Command = require('command')
     
-module.exports = function test(dispatch) {
+module.exports = function autodaily(dispatch) {
 
 const command = Command(dispatch)
 
