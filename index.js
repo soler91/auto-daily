@@ -1,15 +1,11 @@
 const Wait_time = 30, // Time in seconds after loading  
       Load_time = 3; // Time in seconds
 
-const Command = require('command')
-    
 module.exports = function autodaily(dispatch) {
-
-const command = Command(dispatch)
-
-let Daily_Boxes = [169660, 180675], // Deliver Elite Gift box , Deliver Elite Consumable Box
-    slots = [],
-    EmpLeftToClaim;
+    const command = dispatch.command || dispatch.require.command;
+	let Daily_Boxes = [169660, 180675], // Deliver Elite Gift box , Deliver Elite Consumable Box
+		slots = [],
+		EmpLeftToClaim;
 
     dispatch.hook('S_LOAD_CLIENT_USER_SETTING', 1, () => {
         if(slots.length > 0 && EmpLeftToClaim){
